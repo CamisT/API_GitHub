@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Procurando por {{ username }}</h2>
+<h2 mat-dialog-title>Dados de {{username}}</h2>
+<div mat-dialog-content>
+    <mat-progress-spinner color="accent" mode="indeterminate" *ngIf="user == null; else content"></mat-progress-spinner>
+    <ng-template #content>
+        <mat-card class="perfil">
+           <img src="{{user?.avatar_url}}">
+            <mat-card-content>
+                <b>Personal Info</b>
+                <p>Name: {{user?.name}}</p>
+                <p>Bio: {{user?.bio}}</p>
+                <p>Followers: {{user?.followers}}</p>
+                <p>Following: {{user?.following}}</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="repo">
+            <mat-card-title><b>Repositories</b></mat-card-title>
+            <mat-card-content *ngFor="let x of repository">
+                <button mat-stroked-button color="primary"><a [href]="x?.html_url" target="_blank">Repository Name: {{x?.name}}</a></button>
+
+                <p>Language: {{x?.language}}</p>
+                <p>Stars: {{x?.stargazers_count}}</p>
+                <p>Forks: {{x?.forks_count}}</p>
+                <p>Watchers: {{x?.watchers_count}}</p>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</div>
